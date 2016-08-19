@@ -13,9 +13,13 @@ project_path="$(pwd)"
 
 now=$(date +"%Y_%m_%d_%H_%M_%S")
 
+#工程名
+
+project="Demo"
+
 #指定项目的scheme名称
 
-scheme="CloudMoney"
+scheme="Demo"
 
 #指定要打包的配置名
 
@@ -28,25 +32,25 @@ export_method='app-store'
 
 #指定项目地址
 
-workspace_path="$project_path/CloudMoney.xcworkspace"
+workspace_path="$project_path/${project}.xcworkspace"
 
 #指定输出路径
 
-mkdir "${HOME}/Desktop/CloudMoney_${now}"
-output_path="${HOME}/Desktop/CloudMoney_${now}"
+mkdir "${HOME}/Desktop/${project}_${now}"
+output_path="${HOME}/Desktop/${project}_${now}"
 
 echo $output_path
 #指定输出归档文件地址
 
-archive_path="$output_path/CloudMoney_${now}.xcarchive"
+archive_path="$output_path/${project}_${now}.xcarchive"
 
 #指定输出ipa地址
 
-ipa_path="$output_path/CloudMoney_${now}.ipa"
+ipa_path="$output_path/${project}_${now}.ipa"
 
 #指定输出ipa名称
 
-ipa_name="CloudMoney_${now}.ipa"
+ipa_name="${project}_${now}.ipa"
 
 #获取执行命令时的commit message
 
