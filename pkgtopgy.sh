@@ -1,4 +1,5 @@
 #脚本放到工程同目录下 然后下面工程名
+#!/bin/sh
 #/bin/sh package.sh
 #计时
 #LEPgyerApiKey  在Info.plist中配置蒲公英apiKey
@@ -16,10 +17,11 @@ else
 read -p "请输入项目目录的绝对路径:" inputPath
 project_path=$inputPath
 fi
-if [ ! -d "$project_path"]; then
-echo $project_path
+if [[ -d "$project_path" ]]; then
+echo "当前路径为：" $project_path
 else
-echo "录入路径有误，已终止"
+echo "路径："$project_path
+echo "当前路径有误，已终止!!!\n"
 exit
 fi
 #取当前时间字符串添加到文件结尾
@@ -27,6 +29,13 @@ now=$(date +"%Y_%m_%d_%H_%M_%S")
 #工程名
 cd ${project_path}
 project=$(ls | grep xcodeproj | awk -F.xcodeproj '{print $1}')
+#指定项目地址
+workspace_path="$project_path/${project}.xcworkspace"
+if [[ ! -d "$workspace_path" ]]; then
+echo "路径："$workspace_path
+echo "未找到.xcworkspace文件，已终止!!!"
+exit
+fi
 #工程配置文件路径
 project_infoplist_path=${project_path}/${project}/Info.plist
 pgyerApiKey=''
@@ -56,8 +65,7 @@ configuration="Release"
 export_method='development'
 #export_method='app-store'
 
-#指定项目地址
-workspace_path="$project_path/${project}.xcworkspace"
+
 #指定输出路径
 mkdir "${HOME}/Desktop/${project}_${now}"
 output_path="${HOME}/Desktop/${project}_${now}"
