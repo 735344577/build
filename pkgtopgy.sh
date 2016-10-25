@@ -1,14 +1,7 @@
-#脚本放到工程同目录下 然后下面工程名
 #!/bin/sh
-#/bin/sh package.sh
-#计时
 #LEPgyerApiKey  在Info.plist中配置蒲公英apiKey
 #LEPgyerUKey    在Info.plist中配置蒲公英ukey
 
-
-SECONDS=0
-#假设脚本放置在与项目相同的路径下
-#project_path="$(pwd)/newItemForiOS/workspace"
 tempPath="$(pwd)"
 read -p "请确认当前目录为项目根目录：${tempPath}?(y/n)" checkPath
 if [[ $checkPath = "y" ]] ;  then
@@ -24,6 +17,7 @@ echo "路径："$project_path
 echo "当前路径有误，已终止!!!\n"
 exit
 fi
+SECONDS=0
 #取当前时间字符串添加到文件结尾
 now=$(date +"%Y_%m_%d_%H_%M_%S")
 #工程名
@@ -65,7 +59,6 @@ configuration="Release"
 export_method='development'
 #export_method='app-store'
 
-
 #指定输出路径
 mkdir "${HOME}/Desktop/${project}_${now}"
 output_path="${HOME}/Desktop/${project}_${now}"
@@ -97,11 +90,11 @@ echo "==================>Finished. Total time: ${SECONDS}s"
 if [[ $pgyerUKey = '' ]] || [[ $pgyerApiKey = '' ]]; then
 echo "未在工程项目的Info.plist文件中配置LEPgyerApiKey（蒲公英apiKey）及LEPgyerUKey（蒲公英userKey），因此无法上传项目至蒲公英平台"
 else
-if [ ! -f "$ipa_path" ]; then
+if [[ -f "$ipa_path" ]]; then
 result=$(curl -F "file=@$ipa_path" -F "uKey=$pgyerUKey" -F "_api_key=$pgyerApiKey" -F "publishRange=2" -F "isPublishToPublic=2" -F "password=$pgyPassword"  'https://www.pgyer.com/apiv1/app/upload' | json-query data.appShortcutUrl)
 fi
-echo http://www.pgyer.com/$result
-if [[ $result = '' ]]; then
+echo "请前往此处下载最新的app" http://www.pgyer.com/$result
+if [[ $result != '' ]]; then
 open http://www.pgyer.com/$result
 fi
 fi
