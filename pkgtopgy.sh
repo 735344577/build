@@ -16,7 +16,12 @@ else
 read -p "请输入项目目录的绝对路径:" inputPath
 project_path=$inputPath
 fi
+if [ ! -d "$project_path"]; then
 echo $project_path
+else
+echo "录入路径有误，已终止"
+exit
+fi
 #取当前时间字符串添加到文件结尾
 now=$(date +"%Y_%m_%d_%H_%M_%S")
 #工程名
@@ -84,8 +89,12 @@ echo "==================>Finished. Total time: ${SECONDS}s"
 if [[ $pgyerUKey = '' ]] || [[ $pgyerApiKey = '' ]]; then
 echo "未在工程项目的Info.plist文件中配置LEPgyerApiKey（蒲公英apiKey）及LEPgyerUKey（蒲公英userKey），因此无法上传项目至蒲公英平台"
 else
+if [ ! -f "$ipa_path" ]; then
 result=$(curl -F "file=@$ipa_path" -F "uKey=$pgyerUKey" -F "_api_key=$pgyerApiKey" -F "publishRange=2" -F "isPublishToPublic=2" -F "password=$pgyPassword"  'https://www.pgyer.com/apiv1/app/upload' | json-query data.appShortcutUrl)
+fi
 echo http://www.pgyer.com/$result
+if [[ $result = '' ]]; then
 open http://www.pgyer.com/$result
+fi
 fi
 echo "本次打包完成"
