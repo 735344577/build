@@ -3,7 +3,7 @@
 github找了很久自动打包的脚本（shell，python），最后我测试成功的只有2个（1：https://github.com/735344577/build，2：https://github.com/hytzxd/iOS-AutoBuild）。 相比而言1更加简便，2则配置化太发杂和繁琐。最后选择了1，也就是当前的版本作为以后的自动打包及上传的工具。
 
 在作者原版本的基础上，我添加了根目录设置（支持自动识别根目录及外部项目绝对路径设置，这样当前的脚本也可以脱离项目而存在且可以多个项目共享）、蒲公英key的检测与补救输入及上传蒲公英的功能。由于蒲公英支持邮件通知，因此没有添加邮件功能。 
-
+ 
 ###使用前准备工作：
 ``` 
 安装pip
@@ -17,8 +17,7 @@ pip install json-query
 2-终端新建窗口 输入sh （sh+空格），然后拖入文件 pkgtopgy.sh 回车
 （也可以右击-显示简介-打开方式设置为终端，然后双击打开）
 ####运行终端截取：
-
-```
+ ```
 请确认当前目录为项目根目录：/Users/LarryEmerson?(y/n)n
 请输入项目目录的绝对路径:/Volumes/MacHD/LarryEmerson/RemoteGits/xx/
 /Volumes/MacHD/LarryEmerson/RemoteGits/xx/
