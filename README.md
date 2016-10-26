@@ -8,8 +8,11 @@ github找了很久自动打包的脚本（shell，python），最后我测试成
 
 使用方法：
 安装pip
+
 sudo easy_install pip
+
 安装json-query
+
 pip install json-query
 
 下载package.sh至任意目录 终端新建窗口 输入sh （sh+空格），然后拖入文件 package.sh 回车
