@@ -10,6 +10,8 @@ github找了很久自动打包的脚本（shell，python），最后我测试成
 sudo easy_install pip
 安装json-query
 pip install json-query 
+安装gym
+pip install gym
 ```
 ###使用方法：
 ######(目前默认支持development模式，其他模式请修改配置，尚未测试其他模式)
